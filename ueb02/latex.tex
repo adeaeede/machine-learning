@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{listings}
+\usepackage{hyperref}
+\renewcommand{\baselinestretch}{1.5} 
+\DeclareMathOperator*{\argmax}{argmax}
+
+\begin{document}
+\section*{Excercise 2: Why use quadratic loss?}
+
+$$\hat{w}= \argmax\limits_{w}L(X,Y,w)
+=\argmax\limits_{w} \mathbb{P}[y_1=\hat{y}=(x_i;w),...,y_n
+=\hat{y} (x_n;w)|w]$$
+$$=\prod\limits_{i=1}^{n}\mathbb{P}[y_i=\hat{y}(x_i;w)|w]
+=\prod\limits_{i=1}^{n}(2\pi\sigma^2)^{-\frac{1}{2}} e^{-\frac{1}{2\sigma^2}(y_i-\hat{y}(x_i;w))^2}$$
+$$=(2\pi\sigma^2)^{-\frac{n}{2}}e^{-\frac{1}{2\sigma^2}\sum\limits_{i=1}^{n}(y_i-\hat{y}(x_i;w))^2}
+=-\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum\limits_{i=1}^{n}(y_i-\hat{y}(x_i;w))^2$$\\
+Taking a partial derivative with respect to $w$, which is equal to least squares, results in :\\
+$$\frac{\partial \ell(w,\sigma^2)}{\partial w}=-\frac{1}{2\sigma^2}\frac{\partial}{\partial w}((y-x_w)^T(y-x_w)) = -\frac{1}{2\sigma^2}[2X^TXw-2X^Ty]$$\\
+Equating this term to $0$ gives:\\
+$$\hat{w}_{LS}=(X^TX)^{-1}X^Ty=\hat{w}_{ML}$$
+
+This proves, that minimizing the square loss is equal to maximizing the likelihood.
+
+
+
+\end{document}
